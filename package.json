@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8081"
+    "start": "python setup.py && webpack-dev-server --host 0.0.0.0 --port 8081"
   },
   "dependencies": {
     "filepond": "^4.1.0",
