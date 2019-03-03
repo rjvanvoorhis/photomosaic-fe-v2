@@ -4,6 +4,7 @@ import {ProgressCard} from '../ProgressCard'
 import Slider from 'react-rangeslider'
 import {FilePond} from 'react-filepond'
 import {userService} from '../_services'
+import {authHeader} from '../_helpers'
 
 
 class ControlledForm extends React.Component {
@@ -155,7 +156,12 @@ class ControlledForm extends React.Component {
             ref={ref => this.pond = ref}
             name="file"
             allowMultiple={false}
-            server={`${userService.getUserUrl()}/uploads`}
+            server={{
+                     url: `${userService.getUserUrl()}/uploads`,
+                     process: {
+                         headers: authHeader()
+              }
+            }}
             onprocessfile={this.fetchUploads.bind(this)}
           >
           </FilePond>

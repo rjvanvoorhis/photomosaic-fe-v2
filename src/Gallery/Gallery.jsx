@@ -59,7 +59,6 @@ class GalleryItem extends React.Component {
           alt={this.props.item.gallery_id}
           onClick={this.toggleGif.bind(this)}/>
           <div className="card-body">
-            <p>{this.props.item.gallery_id}</p>
             <button
               className="btn btn-secondary"
               onClick={this.toggleQuality.bind(this)}

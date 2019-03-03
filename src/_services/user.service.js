@@ -53,7 +53,10 @@ function getPending() {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', 'Authorization': authHeader().Authorization},
   }
-  return fetch(`${getUserUrl()}/pending_json?${Date.now()}`)
+  return fetch(
+    `${getUserUrl()}/pending_json?${Date.now()}`,
+     requestOptions
+  )
      .then(handleResponse)
 }
 
@@ -147,7 +150,7 @@ function getAll() {
 
 function getUploads() {
   return makeRequest(
-    `${config.apiUrl}/users/${getUsername()}/uploads`
+    `${config.apiUrl}/users/${getUsername()}/uploads`, 'GET'
   ).then(data => {
     let titles= data.map(x => x.img_path.split('_')[x.img_path.split('_').length - 1]);
     let images= data.map(x => `${config.apiUrl}/images/${x.file_id}`);
@@ -185,14 +188,16 @@ function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {
-            if (response.status === 401) {
+            if (response.status === 401 || response.status === 403) {
                 // auto logout if 401 response returned from api
+                console.log('Unauthorized!');
                 logout();
                 location.reload(true);
             }
 
             const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
+            console.log(error)
+	    return Promise.reject(error);
         }
 
         return data;
