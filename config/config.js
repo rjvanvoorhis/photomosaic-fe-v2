@@ -28,7 +28,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'http://{{BROADCAST_IP}}:5000/api/v1/photomosaic'
+            apiUrl: '{{MOSAIC_API_URL_EXTERNAL}}'
         })
     }
 }

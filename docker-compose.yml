@@ -1,0 +1,7 @@
+version: "3.3"
+services:
+  web:
+    image: ryanjvanvoorhis/mosaic-fe-v2
+    build: .
+    ports:
+      - "8081:80"
