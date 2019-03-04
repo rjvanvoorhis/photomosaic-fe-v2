@@ -4,4 +4,4 @@ services:
     image: "ryanjvanvoorhis/mosaic-fe-v2:${ENVIRONMENT}"
     build: .
     ports:
-      - "{FE_PORT}:80"
+      - "${FE_PORT}:80"
