@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   web:
-    image: ryanjvanvoorhis/mosaic-fe-v2
+    image: "ryanjvanvoorhis/mosaic-fe-v2:${ENVIRONMENT}"
     build: .
     ports:
-      - "8081:80"
+      - "{FE_PORT}:80"
