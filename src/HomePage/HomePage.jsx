@@ -43,36 +43,64 @@ class HomePage extends React.Component {
     render() {
         const { user, users } = this.state;
         return (
-          <div className="container-fluid content-row">
+          <div>
             <Navigation/>
-            <div className="row">
-              <div className="col-12 col-md-8">
-                <Paginator
-                    onPageChange={this.handlePageChange}
-                    pages={this.state.users.total}
-                    current={this.state.current}
-                />
-                {users.loading && <em>Loading users...</em>}
-                {users.results.length > 0 ?
-                  <ul className="list-group">
-                      {users.results.map((user, index) =>
-                          <li className="list-group-item">
-                              <GalleryItem
-                                  key={user.gallery_id}
-                                  item={user}
-                                  onDelete={this.handleFormSubmit}
-                              />
-                          </li>
-                      )}
-                  </ul>
-                  : <em>Upload an image to view gallery</em>
-                }
-            </div>
-            <div className="col-6 col-md-4">
-              <ControlledForm onFormSubmit={this.handleFormSubmit} user={user}/>
-            </div>
+            <div className="container-fluid" style={{minWidth: '22rem'}}>
+              <div className="row"> 
+                <div className="col-12 col-md-8">
+                  <Paginator onPageChange={this.handlePageChange} pages={this.state.users.total} current={this.state.current} />
+                  {users.loading && <em>Loading users...</em>}
+                  {users.results.length > 0 ?
+                    <ul className="list-group">
+                        {users.results.map((user, index) =>
+                            <li className="list-group-item">
+                                <GalleryItem
+                                    key={user.gallery_id}
+                                    item={user}
+                                    onDelete={this.handleFormSubmit}
+                                />
+                            </li>
+                        )}
+                    </ul>
+                    : <em>Upload an image to view gallery</em>
+                  }
+                </div>
+                <div className="col-6 col-md-4">
+                  <ControlledForm onFormSubmit={this.handleFormSubmit} user={user}/>
+                </div>
+              </div>
             </div>
           </div>
+//          <div className="container-fluid content-row" style={{minWidth: '22rem'}}>
+//            <Navigation/>
+//            <div className="row">
+//              <div className="col-12 col-md-8">
+//                <Paginator
+//                    onPageChange={this.handlePageChange}
+//                    pages={this.state.users.total}
+//                    current={this.state.current}
+//                />
+//                {users.loading && <em>Loading users...</em>}
+//                {users.results.length > 0 ?
+//                  <ul className="list-group">
+//                      {users.results.map((user, index) =>
+//                          <li className="list-group-item">
+//                              <GalleryItem
+//                                  key={user.gallery_id}
+//                                  item={user}
+//                                  onDelete={this.handleFormSubmit}
+//                              />
+//                          </li>
+//                      )}
+//                  </ul>
+//                  : <em>Upload an image to view gallery</em>
+//                }
+//            </div>
+//            <div className="col-6 col-md-4">
+//              <ControlledForm onFormSubmit={this.handleFormSubmit} user={user}/>
+//            </div>
+//            </div>
+//          </div>
         );
     }
 }

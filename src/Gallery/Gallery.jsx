@@ -52,31 +52,19 @@ class GalleryItem extends React.Component {
     return imgSrc
   }
   render() {
-    // let page_number = this.state.current
-    return (
-     <div className="card h-100">
-       <img className="card-img-top" src={this.setCurrentImage()}
-          alt={this.props.item.gallery_id}
-          onClick={this.toggleGif.bind(this)}/>
-          <div className="card-body">
-            <button
-              className="btn btn-secondary"
-              onClick={this.toggleQuality.bind(this)}
-            >Change Quality</button>
-            <a
-              href={this.setCurrentImage()}
-              className="btn btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >Full Size</a>
-            <a
-                href="#"
-                className="btn btn-danger"
-                onClick={this.deleteItem.bind(this)}>X
-            </a>
+    return(
+      <div className="card h-100" style={{minWidth: '22rem'}} >
+        <img className="card-img-top" src={this.setCurrentImage()} alt={this.props.item.gallery_id} onClick={this.toggleGif.bind(this)}/>
+        <div className="card-body">
+          <div className="btn-group d-inline-flex" role="group" style={{whiteSpace: 'nowrap'}} aria-label="GalleryButons">
+            <button className="btn btn-info" onClick={this.toggleQuality.bind(this)}>Change Quality</button>
+            <a className="btn btn-primary" href={this.setCurrentImage()} target="_blank" rel="noopener noreferrer">Full Size</a>
+            <button className="btn btn-danger" onClick={this.deleteItem.bind(this)}>X</button>
           </div>
-     </div>
-    );
+        </div>
+      </div>
+    )
   }
 }
+
 export { GalleryItem };

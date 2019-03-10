@@ -11,7 +11,7 @@ import './index.css'
 class App extends React.Component {
     render() {
         return (
-            <div className="jumbotron">
+            //<div className="jumbotron">
                 <div className="container">
                         <Router>
                             <div>
@@ -22,7 +22,7 @@ class App extends React.Component {
                             </div>
                         </Router>
                 </div>
-            </div>
+            //</div>
         );
     }
 }

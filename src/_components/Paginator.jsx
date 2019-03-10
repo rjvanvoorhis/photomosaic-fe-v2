@@ -25,7 +25,7 @@ class Paginator extends React.Component {
           let pages = [...Array(this.props.pages).keys()].map(x => this.render_list_item(x))
           return (
             <div className="container">
-              <ul className="pagination">
+              <ul className="pagination d-flex justify-content-center">
                  <li className="page-item" key="first">
                    <a className="page-link" href="#" value="0" onClick={this.handleClick.bind(this, 0)}>
                      <span>first</span>

@@ -95,80 +95,81 @@ class ControlledForm extends React.Component {
     const {current, progress, tile_size, enlargement, pending_image,
     allow_submissions, items, image_paths, titles, images, isLoading} = this.state;
     return (
-      <div className="card h-100">
-        <img
-          className="card-img-top"
-          src={images[current]}
-          alt="Dropdown Thumbnail"
-        />
-      <div className="card-body">
-      <div className="dropdown">
-      <button
-        className="btn btn-primary dropdown-toggle"
-        type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="false" aria-expanded="false">Select<span className="caret"></span></button>
-      <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-      {titles.map((title, index)=>
-        <li><a
-          className="dropdown-item"
-          onClick={this.changeCurrent.bind(this, index)}
-          key={index}
-          href="#">{titles[index]}
-        </a></li>
-      )}
-      </ul>
-        <a
-          href="#" className="btn btn-primary"
-          onClick={this.submitForm.bind(this)}
-          aria-expanded="false" disabled={isLoading}>Submit Form
-        {isLoading &&
-            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        }
-        </a>
-        <a
-          href="#" className="btn btn-danger"
-          onClick={this.deleteItem.bind(this)}
-          aria-expanded="false">X
-        </a>
-      </div>
-      <div className="slider-group">
-        <div className="slider-horizontal">
-          <Slider
-            min={8}
-            max={24}
-            value={tile_size}
-            orientation='horizontal'
-            onChange={this.handleTileChange}
-          />
-          <div className='value'>{`${tile_size} px tiles`}</div>
-        </div>
-        <div className="slider-horizontal">
-          <Slider
-            min={1}
-            max={6}
-            value={enlargement}
-            orientation='horizontal'
-            onChange={this.handleSizeChange}
-          />
-          <div className='value'>{`${enlargement} x original`}</div>
-          <FilePond
-            ref={ref => this.pond = ref}
-            name="file"
-            allowMultiple={false}
-            server={{
-                     url: `${userService.getUserUrl()}/uploads`,
-                     process: {
-                         headers: authHeader()
-              }
-            }}
-            onprocessfile={this.fetchUploads.bind(this)}
-          >
-          </FilePond>
-        </div>
-      </div>
-      </div>
-      </div>
+       <div className="card h-100" style={{minWidth: '22rem', 'maxWidth': '500px'}}>
+         <img
+           className="card-img-top"
+           src={images[current]}
+           alt="Dropdown Thumbnail"
+         />
+         <div className="card-body">
+           <div className="btn-group d-inline-flex" style={{whiteSpace: 'nowrap'}} role="group" aria-label="FormButtons">
+             <div className="dropdown">
+               <button className="btn btn-secondary dropdown-toggle btn-small" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Select Image
+               </button>
+               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                 {titles.map((title, index)=>
+                   <a 
+                     className="dropdown-item" 
+                     href="#"
+                     onClick={this.changeCurrent.bind(this, index)}
+                     key={index}>
+                       {titles[index]}
+                   </a>)
+                  }
+               </div>
+             </div>
+             <button 
+               className="btn btn-info btn-small"
+               onClick={this.submitForm.bind(this)}
+               disabled={isLoading}
+               >Submit Form
+               {
+                 isLoading &&
+                 <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+               }
+             </button>
+             <button className="btn btn-danger btn-small" onClick={this.deleteItem.bind(this)}>X</button>
+           </div>
+           <div className="slider-group">
+             <div className="slider-horizontal">
+               <Slider
+                 min={8}
+                 max={24}
+                 value={tile_size}
+                 orientation='horizontal'
+                 onChange={this.handleTileChange}
+               />
+               <div className='value'>{`${tile_size} px tiles`}</div>
+             </div>
+             <div className="slider-horizontal">
+               <Slider
+                 min={1}
+                 max={6}
+                 value={enlargement}
+                 orientation='horizontal'
+                 onChange={this.handleSizeChange}
+               />
+               <div className='value'>{`${enlargement} x original`}</div>
+             </div>
+             <FilePond
+                ref={ref => this.pond = ref}
+                name="file"
+                allowMultiple={false}
+                server={
+                  {
+                    url: `${userService.getUserUrl()}/uploads`,
+                    process: {
+                      headers: authHeader()
+                    }
+                  }
+                }
+                onprocessfile={this.fetchUploads.bind(this)}
+             >
+             </FilePond>
+           </div>
+         </div>
+       </div>
     )
   };
   render () {
